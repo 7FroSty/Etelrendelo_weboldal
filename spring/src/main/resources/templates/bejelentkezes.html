@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Bejelentkezés</title>
+
+    <header>
+      Üdvözlünk az oldalon! Jelentkezz be!
+    </header>
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+
+<style>
+
+    header{
+        position: fixed;
+        font-family: "Comic Sans MS";
+        font-style: italic;
+        background-color: #333333;
+        width: 1152px;
+        float: left;
+        color: bisque;
+        box-shadow: 0 3px #ddd, 0 2px 25px black;
+        text-align: center;
+    }
+
+    h2{
+        text-align: center;
+    }
+    input, fieldset, legend, label {
+        margin-top: 25px;
+        font-family: "Comic Sans MS";
+    }
+
+    body{
+        background-color: #87CEEB;
+        width: 1152px;
+        margin: auto;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="menu">
+    <li><a th:href="@{ettermek}">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}" class="active">Fiók</a></li>
+
+    </ul>
+</div>
+<span th:if="${session.belepve == 'igaz'}">
+<fieldset>
+<h2>Fiók</h2>
+</fieldset>
+<center>
+	<p>Az adatai</p>
+	<table>
+	<tr>
+		<td>
+		Név:
+		</td>
+		<td>	
+		<div th:text="${session.nev}">nev</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		Email:
+		</td>
+		<td>	
+		<div th:text="${session.email}">nev</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		Telefon:
+		</td>
+		<td>	
+		<div th:text="${session.telefon}">nev</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		stb:
+		</td>
+		<td>	
+		<div th:text="${session.nev}">nev</div>
+		</td>
+	</tr>
+	</table>
+	
+	<center>
+	<form action="#" th:action="@{logout}" method="get">
+    <input type="submit" name="submit-btn" value="Kilépés">
+	</form>
+	</center>
+
+</center>
+</span>
+
+<span th:unless="${session.belepve == 'igaz'}">
+<fieldset>
+<h2>Belépés</h2>
+</fieldset>
+<center>
+<form action="#" th:action="@{login}" method="post" enctype="multipart/form-data">
+    <label>E-mail cím: <input type="text" name="username" required></label> <br>
+    <label>Jelszó: <input type="password" name="pwd" required></label> <br>
+    <input type="submit" name="submit-btn" value="Belépés">
+</form></center>
+
+<center>
+<p>Még nem regisztráltál?</p>
+<a th:href="@{regisztracio}">
+
+    <p>Kattints ide!</p>
+    </a>
+</center>
+</span>
+</body>
+</html>

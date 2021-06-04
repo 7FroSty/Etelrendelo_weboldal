@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Éttermek</title>
+    <header>
+        Nézd meg az éttermeinket!
+    </header>
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <style>
+        label{
+            font-family: "Comic Sans MS";
+
+        }
+        textarea{
+            width: 400px;
+            height: 200px;
+        }
+
+
+        table, td, th{
+            padding: 30px;
+            text-align: center;
+
+        }
+        
+        th{
+        font-family: "Comic Sans MS";
+        background-color: #333333;
+        color: bisque;
+        font-size: 17px;
+        }
+        
+        header{
+            position: absolute;
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            background-color: #333333;
+            width: 1152px;
+            float: left;
+            color: bisque;
+            box-shadow: 0 3px #ddd, 0 2px 25px black;
+            text-align: center;
+        }
+
+        body{
+            background-color: #87CEEB;
+        	width: 1152px;
+        	margin: auto;
+        }
+    
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <li><a th:href="@{ettermek}"class="active">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}">Fiók</a></li>
+    </ul>
+</div>
+
+<center>
+    <table id="szemre">
+       
+        <div th:if="${session.nev != null}">
+        	<div th:text="'Szia '+ ${session.nev} + '! Válassz egy éttermet!'">Joe dirt</div>
+        </div>
+        <thead>
+            <tr>
+                <th id="a">
+                    Étterem neve
+                </th>
+                <th id="b">
+                    Étterem címe
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ettermek : ${ettermek}">
+            <td headers="a,b,c">
+            <a th:href="@{etteremMegnyitas(id=${ettermek.id})}"><p th:text="${ettermek.etterem_neve}"></p></a>
+            </td>
+            <td headers="a,b,c">
+                <p th:text="${ettermek.etterem_cime}"></p>
+            </td>
+         
+		</tr>
+        </tbody>
+
+    </table>
+</center>
+</body>
+</html>

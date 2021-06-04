@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Éttermek</title>
+    <header>
+        Válassz az ételek közül!
+    </header>
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+    <style>
+    
+    		
+        label{
+            font-family: "Comic Sans MS";
+
+        }
+        textarea{
+            width: 400px;
+            height: 200px;
+        }
+
+        caption {
+            font-size: 23px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        table, td, th{
+            padding: 30px;
+            text-align: center;
+
+
+        }
+        
+        th{
+        font-family: "Comic Sans MS";
+        background-color: #333333;
+        color: bisque;
+        font-size: 17px;
+        }
+        
+        star{
+        	padding: 0px;
+        	}
+        	
+        header{
+            position: absolute;
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            background-color: #333333;
+            width: 1152px;
+            float: left;
+            color: bisque;
+            box-shadow: 0 3px #ddd, 0 2px 25px black;
+            text-align: center;
+        }
+
+        body{
+            background-color: #87CEEB;
+        	width: 1152px;
+        	margin: auto;
+        }
+        
+        .rate {
+	left:50%;
+    height: 46px;
+    padding: 0 10px;
+
+}
+
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+   
+    
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+    
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+ 
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+  
+}
+        
+
+    </style>
+</head>
+<body>
+<div class="menu">
+    <li><a th:href="@{ettermek}"class="active">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}">Fiók</a></li>
+    </ul>
+</div>
+
+ <center>
+ 
+
+ <center>
+ <table>
+ 	<h3>Értékeld éttermünket!</h3>
+ 	<th class="star">
+ 	<div class="rate">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+ 	 </div>
+ 	 </th>
+ 	 </center>
+
+  </table>
+  </center>  
+
+ 
+  
+
+<center>
+    <table id="szemre">
+        <caption></caption>
+        <thead>
+	        <tr>
+                
+	            <th id="a">
+	                Étel neve
+	            </th>
+	            <th id="b">
+	                Ár
+	            </th>
+	            <th id="c">
+	                Kosárba
+	            </th>
+	             <th id="d">
+	                Kedvencekhez ad
+	            </th>
+	        </tr>
+        </thead>
+        <tbody>
+        
+        <span th:each="etterem : ${ettermek}">
+        <div th:if="${session.etterem == etterem.id}">
+	        <tr th:each="etelek : ${etelek}" >
+	            <td  th:text="${etelek.nev}"></td>
+	            <td  th:text="${etelek.ar} + ' Ft' "></td>
+	            
+	            <form action="#" th:action="@{kosar}" method="post">
+	            	<input type="hidden" value="etterem1" name="etterem">
+	            	<input type="hidden" th:value="${etelek.ar}" name="ar">
+	            	<input type="hidden" th:value="${etelek.nev}" name="nev">
+		            <td><input type="submit" name="submit-kosar" value="Kosárba"></td>
+		        </form>
+		        <form action="#" th:action="@{kedvencek}" method="post">
+		        	<input type="hidden" th:value="${etelek.nev}" name="nev">
+		        	<input type="hidden" value="etterem1" name="etterem">
+		            <td><input type="submit" name="submit-kedvencek" value="Kedvenc"></td>
+	            </form>
+	    </div>
+        </span>
+        </tr>
+        </tbody>
+    </table>
+</center>
+
+</body>
+</html>

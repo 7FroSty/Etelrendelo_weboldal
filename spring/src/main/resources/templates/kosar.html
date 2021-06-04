@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Kosár</title>
+	 <header>
+        Kosarad!
+    </header>
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+
+    <style>
+        label{
+            font-family: "Comic Sans MS";
+
+        }
+        textarea{
+            width: 400px;
+            height: 200px;
+        }
+
+
+        table, td, th{
+            padding: 30px;
+            text-align: center;
+
+        }
+        
+        th{
+        	font-family: "Comic Sans MS";
+       		background-color: #333333;
+       		color: bisque;
+        	font-size: 17px;
+        }
+        
+        header{
+            position: absolute;
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            background-color: #333333;
+            width: 1152px;
+            float: left;
+            color: bisque;
+            box-shadow: 0 3px #ddd, 0 2px 25px black;
+            text-align: center;
+        }
+
+        body{
+            background-color: #87CEEB;
+        	width: 1152px;
+        	margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="menu">
+    <li><a th:href="@{ettermek}">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}"class="active">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}">Fiók</a></li>
+    </ul>
+</div>
+
+<center>
+	<table id="szemre">
+		 <thead>
+            <tr>
+                <th id="a">
+                    Étel neve
+                </th>
+                <th id="b">
+                    Ár
+                </th>
+                <th id="c">
+	                Étel törlése
+	            </th>
+            </tr>
+        </thead>
+        <tbody>
+
+			<div th:text="${session.hiba}">hiba</div>
+	        <tr th:each="etelek : ${session.rendeles.getEtelek()}" >
+	            <td  th:text="${etelek.getNev()}"></td>
+	            <td  th:text="${etelek.getAr()} + ' Ft' "></td>
+	            <form action="#" th:action="@{torles}" method="post">
+	            	<input type="hidden" th:value="${etelek.getNev()}" name="etel">
+	            	<td><input type="submit" name="submit-torles" value="Törlés"></td>
+		        </form>
+	        </tr>
+	        </tbody>
+	        <form action="#" th:action="@{leadas}" method="post">
+	        	<tr>
+					<td>Megjegyzés:</td>
+					<td><input type="text" name="megjegyzes"</td>
+			        <td></td>
+		        </tr>
+		       	<tr>
+					<td>Cím:</td>
+					<td><input type="text" name="cim"</td>
+			        <td></td>
+		        </tr>
+		        <tr>
+		        	<td th:text="'Összesen: ' + ${session.rendeles.getOsszeg()} +' Ft'">ar</td>
+					<td></td>
+		        	<td><input type="submit" name="submit-leadas" value="Rendelés leadása"></td>
+		        </tr>
+	        </form>
+
+        <span th:unless="${session.rendeles.getEtelek().size() != 0}">
+			<h2>A kosár üres</h2>
+        </span>
+	</table>
+</center>
+
+</body>
+</html>

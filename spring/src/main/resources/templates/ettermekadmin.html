@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Éttermek</title>
+    <img src="fejlec2.png" alt="fejlec" />
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    
+    <style>
+        label{
+            font-family: "Comic Sans MS";
+
+        }
+        textarea{
+            width: 400px;
+            height: 200px;
+        }
+
+        
+        table, td, th{
+            padding: 30px;
+            text-align: center;
+
+        }
+        
+        th{
+        font-family: "Comic Sans MS";
+        background-color: #333333;
+        color: bisque;
+        font-size: 17px;
+        }
+        
+        header{
+            position: absolute;
+            font-family: "Comic Sans MS";
+            font-style: italic;
+            background-color: #333333;
+            width: 1152px;
+            float: left;
+            color: bisque;
+            box-shadow: 0 3px #ddd, 0 2px 25px black;
+            text-align: center;
+        }
+
+        body{
+            background-color: #87CEEB;
+        	width: 1152px;
+        	margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="menu">
+    <li><a th:href="@{ettermekadmin}"class="active">Éttermek</a></li>
+    <form action="#" th:action="@{logout}" method="get">
+    <input type="submit" name="submit-btn" value="Kilépés">
+	</form>
+</div>
+
+
+<center>
+    <table id="szemre">
+         <thead>
+            <tr>
+            
+                <th id="a">
+                    Étterem neve
+                </th>
+                <th id="b">
+                    Étterem címe
+                </th>
+                <th id="b">
+                    Törlés
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ettermek : ${ettermek}">
+            <td th:text="${ettermek.etterem_neve}"></td>
+            <td th:text="${ettermek.etterem_cime}"></td>
+
+            <td>
+                <a th:href="@{/ettermekadmin/delete/{id}(id=${ettermek.id})}">
+                    <button value="delete">Törlés</button>
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Regisztráció</title>
+
+    <header>
+      Üdvözlünk az oldalon! Regisztrálj!
+    </header>
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+
+<style>
+
+    header{
+        position: fixed;
+        font-family: "Comic Sans MS";
+        font-style: italic;
+        background-color: #333333;
+        width: 1152px;
+        float: left;
+        color: bisque;
+        box-shadow: 0 3px #ddd, 0 2px 25px black;
+        text-align: center;
+    }
+    footer{
+        display: block;
+        font-family: "Comic Sans MS";
+        font-style: italic;
+    }
+
+
+    h2{
+        text-align: center;
+    }
+    input, fieldset, legend, label {
+        margin-top: 25px;
+        font-family: "Comic Sans MS";
+    }
+
+
+    body{
+        background-color: #87CEEB;
+        width: 1152px;
+        margin: auto;
+    }
+</style>
+</head>
+<body>
+
+<div class="menu">
+    <li><a th:href="@{ettermek}">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}"class="active">Fiók</a></li>
+    </ul>
+</div>
+
+<fieldset>
+    <h2>Regisztráció</h2>
+</fieldset>
+
+<center>
+<form action="#" th:action="@{/register}" method="post" enctype="multipart/form-data">
+   <label>Név: <input type="text" name="name" required></label> <br>
+    <label>E-mail cím: <input type="email" name="email" required></label> <br>
+    <label>Jelszó: <input type="password" name="pwd" required></label> <br>
+    <label>Telefon: <input type="tel" name="tel" required></label><br>
+    <input type="submit" name="submit-btn" value="Regisztráció">
+</form>
+</center>
+
+</body>
+</html>

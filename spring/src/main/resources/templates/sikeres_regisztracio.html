@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Sikeres regisztráció</title>
+
+    <img th:src="@{fejlec2.png}" alt="fejlec" />
+    <link rel="stylesheet" type="text/css" th:href="@{menu.css}">
+
+    <style>
+        h3{
+            font-family: "Comic Sans MS";
+            margin-top: 120px;
+        }
+
+        body {
+            background-color: #87CEEB;
+            width: 1152px;
+        	margin: auto;
+        }
+
+        fieldset {
+            margin-top: 100px;
+            font-family: "Comic Sans MS";
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="menu">
+    <li><a th:href="@{ettermek}"class="active">Éttermek</a></li>
+    <li><a th:href="@{kedvencek}">Kedvencek</a></li>
+    <li><a th:href="@{kosar}">Kosár</a></li>
+    <li><a th:href="@{bejelentkezes}">Fiók</a></li>
+    </ul>
+</div>
+
+<fieldset>
+    <h1>Sikeres regisztráció!</h1>
+</fieldset>
+
+<center>
+    <p><a th:href="@{bejelentkezes}">Bejelentkezéshez kattints ide!</a></p>
+</center>
+
+</body>
+</html>
